@@ -1,0 +1,9 @@
+start() = 
+    move(1) 
+    []
+    move(2) 
+
+rotate() = 
+    [trainer[1] == active && trainer[2] == inactive]switch{trainer[1] = inactive; trainer[2] = active;} -> move(2) -> rotate()
+    []
+    [trainer[2] == active && trainer[1] == inactive]switch{trainer[2] = inactive; trainer[1] = active;} -> move(1) -> rotate() 
