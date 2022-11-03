@@ -1,0 +1,35 @@
+﻿#define active 1 // trainer is active
+#define inactive 0 // trainer is inactive
+#define win 2 // trainer wins
+#define lose -1 //trainer loses
+
+var trainer[2] // trainer’s status
+var health[2] // pokemon’s HP
+var levels[2] // pokemon’s level
+var moves[2][4]  // pokemon’s move powers
+var attack[2] // pokemon’s attack
+var defence[2] // pokemon’s defence
+
+Rotate() = ([trainer[1] == active && trainer[2] == inactive]switch{trainer[1] = inactive; trainer[2] = active;} -> move(2)
+	[] 
+	[trainer[2] == active && trainer[1] == inactive]switch{trainer[2] = inactive; trainer[1] = active;} -> move(1)
+	) -> Rotate();
+
+//move(i) = attack(i, moves[i][1]) 
+//        [] attack(i, moves[i][2]) 
+//        [] attack(i, moves[i][3]) 
+//        [] attack(i, moves[i][4])
+//attack(i, p) = (trainer[1] == active→health[2] - (((((2*level[1])/5) + 2)*p*attack[1]/defence[2])/50 + 2)) 
+//[] (trainer[2] == active→health[1] - (((((2*level[2])/5) + 2)*p*attack[2]/defence[1])/50 + 2)) → rotate()
+//
+//end() = (health[1] == 0→trainer[2] = 2; trainer[1] = -1 →stop) 
+//    [] (health[2] == 0→trainer[1] = 2; trainer[2] = -1→stop)
+
+Start() = Move(1) [] Move(2);
+
+//Simulate = Start || Rotate || Attack || End || Move
+
+#define trainer0win (trainer[0] == win && trainer[1] == lose)
+#define trainer1win (trainer[1] == win && trainer[0] == lose)
+#define bothtrainerwin (trainer[0] == win && trainer[1] == win)
+#define bothtrainerlose (trainer[0] == lose && trainer[1] == lose)
