@@ -1,0 +1,180 @@
+// trainer0: [Typhlosion, Feraligatr, Meganium, Charizard, Venusaur, Blastoise]
+// trainer1: [Infernape, Empoleon, Torterra, Emboar, Samurott, Serperior]
+
+#define active 1; //trainer active
+#define inactive 0; //trainer inactive
+#define win 2; // trainer wins
+#define lose -1; //trainer loses
+
+var trainer[2] = [active, inactive]; //initial trainer states
+var currentPokemon[2] = [0, 0]; // index of trainers current pokemon
+
+var trainer0AttackStats[6] = [84, 105, 82, 84, 82, 83];
+var trainer0DefenceStats[6] = [78, 100, 100, 78, 83, 100];
+var trainer0HealthStats[6] = [78, 85, 80, 78, 80, 79];
+var trainer0Levels[6] = [40, 40, 40, 40, 40, 40];
+
+var trainer0pokemon0moves = [90, 100, 70, 75]; // Typhlosion: [Flamethrower, Iron Tail, Shadow Claw, Thunder Punch]
+var trainer0pokemon1moves = [90, 60, 85, 60]; // Feraligatr: [Surf, Aerial Ace, Body Slam, Avalanche]
+var trainer0pokemon2moves = [60, 80, 70, 120]; // Meganium: [Magical Leaf, Strength, Headbutt, Solar Beam]
+var trainer0pokemon3moves = [90, 80, 150, 60]; // Charizard: [Flamethrower, Dragon Claw, Giga Impact, Incinerate]
+var trainer0pokemon4moves = [60, 90, 120, 150]; // Venusaur: [Magical Leaf, Sludge Bomb, Power Whip, Hyper Beam]
+var trainer0pokemon5moves = [90, 90, 100, 80]; // Blastoise: [Surf, Ice Beam, Earthquake, Dark Pulse]
+
+var trainer1AttackStats[6] = [104, 86, 109, 123, 100, 95];
+var trainer1DefenceStats[6] = [71, 88, 105, 65, 85, 75];
+var trainer1HealthStats[6] = [76, 84, 95, 110, 95, 75];
+var trainer1Levels[6] = [40, 40, 40, 40, 40, 40];
+
+var trainer1pokemon0moves = [90, 40, 130, 90]; // Infernape: [Flamethrower, Mach Punch, High Jump Kick, Rock Climb]
+var trainer1pokemon1moves = [90, 110, 80, 70]; // Empoleon: [Surf, Blizzard, Scald, Shadow Claw]
+var trainer1pokemon2moves = [60, 90, 75, 100]; // Torterra: [Magical Leaf, Energy Ball, Giga Drain, Iron Tail]
+var trainer1pokemon3moves = [90, 75, 40, 120]; // Emboar: [Flamethrower, Arm Thrust, Echoed Voice, Flare Blitz]
+var trainer1pokemon4moves = [90, 90, 150, 70]; // Samurott: [Surf, Aqua Tail, Hydro Cannon, Slash]
+var trainer1pokemon5moves = [60, 60, 90, 150]; // Serperior: [Magical Leaf, Dragon Tail, Frenzy Plant]
+
+rotate() = 
+        [trainer[0] == active && trainer[1] == inactive]switchTrainer{trainer[0] = inactive; trainer[1] = active} -> move(1)
+        []
+        [trainer[1] == active && trainer[0] == inactive]switchTrainer{trainer[1] = inactive; trainer[0] = active} -> move(0);
+        
+move(i) = 
+        [i == 0 && currentPokemon[1] == 0]attackFoe.i -> attack(i, 0)
+        []
+        [i == 0 && currentPokemon[1] == 1]attackFoe.i -> attack(i, 1)
+        []
+        [i == 0 && currentPokemon[1] == 2]attackFoe.i -> attack(i, 2)
+        []
+        [i == 0 && currentPokemon[1] == 3]attackFoe.i -> attack(i, 3)
+        []
+        [i == 0 && currentPokemon[1] == 4]attackFoe.i -> attack(i, 4)
+        []
+        [i == 0 && currentPokemon[1] == 5]attackFoe.i -> attack(i, 5)
+        []
+        [i == 1 && currentPokemon[0] == 0]attackFoe.i -> attack(i, 0)
+        []
+        [i == 1 && currentPokemon[0] == 1]attackFoe.i -> attack(i, 1)
+        []
+        [i == 1 && currentPokemon[0] == 2]attackFoe.i -> attack(i, 2)
+        []
+        [i == 1 && currentPokemon[0] == 3]attackFoe.i -> attack(i, 3)
+        []
+        [i == 1 && currentPokemon[0] == 4]attackFoe.i -> attack(i, 4)
+        []
+        [i == 1 && currentPokemon[0] == 5]attackFoe.i -> attack(i, 5);
+
+attack(i, m) = [i == 0 && currentPokemon[i] == 0]pokemon0attack -> pcase {
+        [0.25]: damage(0, trainer0pokemon0moves[0], m)
+        [0.25]: damage(0, trainer0pokemon0moves[1], m)
+        [0.25]: damage(0, trainer0pokemon0moves[2], m)
+        [0.25]: damage(0, trainer0pokemon0moves[3], m)
+} [] [i == 0 && currentPokemon[i] == 1]pokemon0attack -> pcase {
+        [0.25]: damage(0, trainer0pokemon1moves[0], m)
+        [0.25]: damage(0, trainer0pokemon1moves[1], m)
+        [0.25]: damage(0, trainer0pokemon1moves[2], m)
+        [0.25]: damage(0, trainer0pokemon1moves[3], m)
+} [] [i == 0 && currentPokemon[i] == 2]pokemon0attack -> pcase {
+        [0.25]: damage(0, trainer0pokemon2moves[0], m)
+        [0.25]: damage(0, trainer0pokemon2moves[1], m)
+        [0.25]: damage(0, trainer0pokemon2moves[2], m)
+        [0.25]: damage(0, trainer0pokemon2moves[3], m)
+} [] [i == 0 && currentPokemon[i] == 3]pokemon0attack -> pcase {
+        [0.25]: damage(0, trainer0pokemon3moves[0], m)
+        [0.25]: damage(0, trainer0pokemon3moves[1], m)
+        [0.25]: damage(0, trainer0pokemon3moves[2], m)
+        [0.25]: damage(0, trainer0pokemon3moves[3], m)
+} [] [i == 0 && currentPokemon[i] == 4]pokemon0attack -> pcase {
+        [0.25]: damage(0, trainer0pokemon4moves[0], m)
+        [0.25]: damage(0, trainer0pokemon4moves[1], m)
+        [0.25]: damage(0, trainer0pokemon4moves[2], m)
+        [0.25]: damage(0, trainer0pokemon4moves[3], m)
+} [] [i == 0 && currentPokemon[i] == 5]pokemon0attack -> pcase {
+        [0.25]: damage(0, trainer0pokemon5moves[0], m)
+        [0.25]: damage(0, trainer0pokemon5moves[1], m)
+        [0.25]: damage(0, trainer0pokemon5moves[2], m)
+        [0.25]: damage(0, trainer0pokemon5moves[3], m)
+} [] [i == 1 && currentPokemon[i] == 0]pokemon1attack -> pcase {
+        [0.25]: damage(1, trainer1pokemon0moves[0], m)
+        [0.25]: damage(1, trainer1pokemon0moves[1], m)
+        [0.25]: damage(1, trainer1pokemon0moves[2], m)
+        [0.25]: damage(1, trainer1pokemon0moves[3], m)
+} [] [i == 1 && currentPokemon[i] == 1]pokemon1attack -> pcase {
+        [0.25]: damage(1, trainer1pokemon1moves[0], m)
+        [0.25]: damage(1, trainer1pokemon1moves[1], m)
+        [0.25]: damage(1, trainer1pokemon1moves[2], m)
+        [0.25]: damage(1, trainer1pokemon1moves[3], m)
+} [] [i == 1 && currentPokemon[i] == 2]pokemon0attack -> pcase {
+        [0.25]: damage(1, trainer1pokemon2moves[0], m)
+        [0.25]: damage(1, trainer1pokemon2moves[1], m)
+        [0.25]: damage(1, trainer1pokemon2moves[2], m)
+        [0.25]: damage(1, trainer1pokemon2moves[3], m)
+} [] [i == 1 && currentPokemon[i] == 3]pokemon1attack -> pcase {
+        [0.25]: damage(1, trainer1pokemon3moves[0], m)
+        [0.25]: damage(1, trainer1pokemon3moves[1], m)
+        [0.25]: damage(1, trainer1pokemon3moves[2], m)
+        [0.25]: damage(1, trainer1pokemon3moves[3], m)
+} [] [i == 1 && currentPokemon[i] == 4]pokemon1attack -> pcase {
+        [0.25]: damage(1, trainer1pokemon4moves[0], m)
+        [0.25]: damage(1, trainer1pokemon4moves[1], m)
+        [0.25]: damage(1, trainer1pokemon4moves[2], m)
+        [0.25]: damage(1, trainer1pokemon4moves[3], m)
+} [] [i == 1 && currentPokemon[i] == 5]pokemon1attack -> pcase {
+        [0.25]: damage(1, trainer1pokemon5moves[0], m)
+        [0.25]: damage(1, trainer1pokemon5moves[1], m)
+        [0.25]: damage(1, trainer1pokemon5moves[2], m)
+        [0.25]: damage(1, trainer1pokemon5moves[3], m)
+};
+
+damage(i, p, m) = 
+        [i == 0 && m == 0]damageFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (((((2*trainer1Levels[m])/5) + 2)*p*(trainer1AttackStats[m]/trainer1DefenceStats[m])/50) + 2)} -> switch(1, m)
+        []
+        [i == 0 && m == 1]damageFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (((((2*trainer1Levels[m])/5) + 2)*p*(trainer1AttackStats[m]/trainer1DefenceStats[m])/50) + 2)} -> switch(1, m)
+        []
+        [i == 0 && m == 2]damageFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (((((2*trainer1Levels[m])/5) + 2)*p*(trainer1AttackStats[m]/trainer1DefenceStats[m])/50) + 2)} -> switch(1, m)
+        []
+        [i == 0 && m == 3]damageFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (((((2*trainer1Levels[m])/5) + 2)*p*(trainer1AttackStats[m]/trainer1DefenceStats[m])/50) + 2)} -> switch(1, m)
+        []
+        [i == 0 && m == 4]damageFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (((((2*trainer1Levels[m])/5) + 2)*p*(trainer1AttackStats[m]/trainer1DefenceStats[m])/50) + 2)} -> switch(1, m)
+        []
+        [i == 0 && m == 5]damageFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (((((2*trainer1Levels[m])/5) + 2)*p*(trainer1AttackStats[m]/trainer1DefenceStats[m])/50) + 2)} -> switch(1, m)
+        []
+        [i == 1 && m == 0]damageFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (((((2*trainer0Levels[m])/5) + 2)*p*(trainer0AttackStats[m]/trainer0DefenceStats[m])/50) + 2)} -> switch(0, m)
+        []
+        [i == 1 && m == 1]damageFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (((((2*trainer0Levels[m])/5) + 2)*p*(trainer0AttackStats[m]/trainer0DefenceStats[m])/50) + 2)} -> switch(0, m)
+        []
+        [i == 1 && m == 2]damageFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (((((2*trainer0Levels[m])/5) + 2)*p*(trainer0AttackStats[m]/trainer0DefenceStats[m])/50) + 2)} -> switch(0, m)
+        []
+        [i == 1 && m == 3]damageFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (((((2*trainer0Levels[m])/5) + 2)*p*(trainer0AttackStats[m]/trainer0DefenceStats[m])/50) + 2)} -> switch(0, m)
+        []
+        [i == 1 && m == 4]damageFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (((((2*trainer0Levels[m])/5) + 2)*p*(trainer0AttackStats[m]/trainer0DefenceStats[m])/50) + 2)} -> switch(0, m)
+        []
+        [i == 1 && m == 5]damageFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (((((2*trainer0Levels[m])/5) + 2)*p*(trainer0AttackStats[m]/trainer0DefenceStats[m])/50) + 2)} -> switch(0, m);
+
+switch(i, c) =
+        [i == 1]sendPokemon.i{if (trainer1HealthStats[c] <= 0) {currentPokemon[i] = c + 1}} -> end()
+        []
+        [i == 0]sendPokemon.i{if (trainer0HealthStats[c] <= 0) {currentPokemon[i] = c + 1}} -> end();
+
+end() =
+        [currentPokemon[0] > 5]trainer1win{trainer[0] = lose; trainer[1] = win} -> Stop
+        []
+        [currentPokemon[1] > 5]trainer0win{trainer[0] = win; trainer[1] = lose} -> Stop
+        []
+        [currentPokemon[0] <= 5 && currentPokemon[1] <= 5] rotate();
+
+start() = 
+	trainer0start{trainer[0] = active; trainer[1] = inactive} -> move(0)
+	[]
+	trainer1start{trainer[1] = active; trainer[0] = inactive} -> move(1);
+
+simulate = start();
+
+#define trainer0wins (trainer[0] == win && trainer[1] == lose);
+#define trainer1wins (trainer[1] == win && trainer[0] == lose);
+#define bothtrainerswin (trainer[0] == win && trainer[1] == win);
+#define bothtrainerslose (trainer[0] == lose && trainer[1] == lose);
+
+#assert simulate reaches trainer0wins;
+#assert simulate reaches trainer1wins;
+#assert simulate reaches bothtrainerswin;
+#assert simulate reaches bothtrainerslose;
