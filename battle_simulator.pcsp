@@ -4,10 +4,10 @@
 #define lose -1; //trainer loses
 
 var trainer[2] = [active, inactive]; //initial trainer states
-var health[2] = [200, 200]; // pokemon's HP
-var attackStat[2] = [83, 82]; // pokemon's attack
-var defenceStat[2] = [100, 83]; // pokemon's defence
-var level[2] = [50, 50]; // pokemon's level
+var health[2] = [80, 79]; // pokemon's HP [Blastoise, Venusaur]
+var attackStat[2] = [83, 82]; // pokemon's attack [Blastoise, Venusaur]
+var defenceStat[2] = [100, 83]; // pokemon's defence [Blastoise, Venusaur]
+var level[2] = [50, 50]; // pokemon's level [Blastoise, Venusaur]
 var pokemon0Moves = [90, 90, 100, 80]; // Blastoise: Surf, Ice Beam, Earthquake, Gyro Ball
 var pokemon1Moves = [60, 90, 85, 70]; // Venusaur: Magical Leaf, Sludge Bomb, Body Slam, Secret Power
 
