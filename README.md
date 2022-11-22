@@ -7,8 +7,8 @@ Repository for CS4211 project, modelling a simplified version of a Pokemon battl
 
 ### Steps
 - Import all the CSV files from the repository and upload them to Google Colab notebook directory
--- It should be the current working directory
--- There should be a sample data folder present as well
+   - It should be the current working directory
+   - There should be a sample data folder present as well
 - Proceed to the 'Runtime' tab and click 'Run all' or press  'CTRL + F9'
 - Download the generated 'battle_simulator_multiple_pokemon_real_data.pcsp' file
 - Open and run it in PAT
