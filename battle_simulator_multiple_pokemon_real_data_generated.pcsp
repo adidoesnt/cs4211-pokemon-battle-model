@@ -1,0 +1,765 @@
+﻿// trainer0's team:
+// Typhlosion
+// 	attack: 84 defense: 78 sp. attack: 109 sp. defense: 85
+// 	Flamethrower   	Type: Fire Power: 90.0 Acc.: 100 Effect: Special
+// 	Iron Tail      	Type: Steel Power: 100.0 Acc.: 75 Effect: Physical
+// 	Shadow Claw    	Type: Ghost Power: 70.0 Acc.: 100 Effect: Physical
+// 	Thunder Punch  	Type: Electric Power: 75.0 Acc.: 100 Effect: Physical
+// Feraligatr
+// 	attack: 105 defense: 100 sp. attack: 79 sp. defense: 83
+// 	Surf           	Type: Water Power: 90.0 Acc.: 100 Effect: Special
+// 	Aerial Ace     	Type: Flying Power: 60.0 Acc.: ∞ Effect: Physical
+// 	Body Slam      	Type: Normal Power: 85.0 Acc.: 100 Effect: Physical
+// 	Avalanche      	Type: Ice Power: 60.0 Acc.: 100 Effect: Physical
+// Meganium
+// 	attack: 82 defense: 100 sp. attack: 83 sp. defense: 100
+// 	Magical Leaf   	Type: Grass Power: 60.0 Acc.: ∞ Effect: Special
+// 	Strength       	Type: Normal Power: 80.0 Acc.: 100 Effect: Physical
+// 	Headbutt       	Type: Normal Power: 70.0 Acc.: 100 Effect: Physical
+// 	Solar Beam     	Type: Grass Power: 120.0 Acc.: 100 Effect: Special
+// Charizard
+// 	attack: 84 defense: 78 sp. attack: 109 sp. defense: 85
+// 	Flamethrower   	Type: Fire Power: 90.0 Acc.: 100 Effect: Special
+// 	Dragon Claw    	Type: Dragon Power: 80.0 Acc.: 100 Effect: Physical
+// 	Giga Impact    	Type: Normal Power: 150.0 Acc.: 90 Effect: Physical
+// 	Incinerate     	Type: Fire Power: 60.0 Acc.: 100 Effect: Special
+// Venusaur
+// 	attack: 82 defense: 83 sp. attack: 100 sp. defense: 100
+// 	Magical Leaf   	Type: Grass Power: 60.0 Acc.: ∞ Effect: Special
+// 	Sludge Bomb    	Type: Poison Power: 90.0 Acc.: 100 Effect: Special
+// 	Power Whip     	Type: Grass Power: 120.0 Acc.: 85 Effect: Physical
+// 	Hyper Beam     	Type: Normal Power: 150.0 Acc.: 90 Effect: Special
+// Blastoise
+// 	attack: 83 defense: 100 sp. attack: 85 sp. defense: 105
+// 	Surf           	Type: Water Power: 90.0 Acc.: 100 Effect: Special
+// 	Ice Beam       	Type: Ice Power: 90.0 Acc.: 100 Effect: Special
+// 	Earthquake     	Type: Ground Power: 100.0 Acc.: 100 Effect: Physical
+// 	Dark Pulse     	Type: Dark Power: 80.0 Acc.: 100 Effect: Special
+
+// trainer1's team:
+// Infernape
+// 	attack: 104 defense: 71 sp. attack: 104 sp. defense: 71
+// 	Flamethrower   	Type: Fire Power: 90.0 Acc.: 100 Effect: Special
+// 	Mach Punch     	Type: Fighting Power: 40.0 Acc.: 100 Effect: Physical
+// 	High Jump Kick 	Type: Fighting Power: 130.0 Acc.: 90 Effect: Physical
+// 	Rock Climb     	Type: Normal Power: 90.0 Acc.: 85 Effect: Physical
+// Empoleon
+// 	attack: 86 defense: 88 sp. attack: 111 sp. defense: 101
+// 	Surf           	Type: Water Power: 90.0 Acc.: 100 Effect: Special
+// 	Blizzard       	Type: Ice Power: 110.0 Acc.: 70 Effect: Special
+// 	Scald          	Type: Water Power: 80.0 Acc.: 100 Effect: Special
+// 	Shadow Claw    	Type: Ghost Power: 70.0 Acc.: 100 Effect: Physical
+// Torterra
+// 	attack: 109 defense: 105 sp. attack: 75 sp. defense: 85
+// 	Magical Leaf   	Type: Grass Power: 60.0 Acc.: ∞ Effect: Special
+// 	Energy Ball    	Type: Grass Power: 90.0 Acc.: 100 Effect: Special
+// 	Giga Drain     	Type: Grass Power: 75.0 Acc.: 100 Effect: Special
+// 	Iron Tail      	Type: Steel Power: 100.0 Acc.: 75 Effect: Physical
+// Emboar
+// 	attack: 123 defense: 65 sp. attack: 100 sp. defense: 65
+// 	Flamethrower   	Type: Fire Power: 90.0 Acc.: 100 Effect: Special
+// 	Arm Thrust     	Type: Fighting Power: 15.0 Acc.: 100 Effect: Physical
+// 	Echoed Voice   	Type: Normal Power: 40.0 Acc.: 100 Effect: Special
+// 	Flare Blitz    	Type: Fire Power: 120.0 Acc.: 100 Effect: Physical
+// Samurott
+// 	attack: 100 defense: 85 sp. attack: 108 sp. defense: 70
+// 	Surf           	Type: Water Power: 90.0 Acc.: 100 Effect: Special
+// 	Aqua Tail      	Type: Water Power: 90.0 Acc.: 90 Effect: Physical
+// 	Hydro Cannon   	Type: Water Power: 150.0 Acc.: 90 Effect: Special
+// 	Slash          	Type: Normal Power: 70.0 Acc.: 100 Effect: Physical
+// Serperior
+// 	attack: 75 defense: 95 sp. attack: 75 sp. defense: 95
+// 	Magical Leaf   	Type: Grass Power: 60.0 Acc.: ∞ Effect: Special
+// 	Dragon Tail    	Type: Dragon Power: 60.0 Acc.: 90 Effect: Physical
+// 	Frenzy Plant   	Type: Grass Power: 150.0 Acc.: 90 Effect: Special
+// 	Hyper Beam     	Type: Normal Power: 150.0 Acc.: 90 Effect: Special
+
+#define active 1; //trainer active
+#define inactive 0; //trainer inactive
+#define win 2; // trainer wins
+#define lose -1; //trainer loses
+
+var trainer[2] = [active, inactive]; //initial trainer states
+var currentPokemon[2] = [0, 0]; // index of trainers current pokemon
+
+var trainer0HealthStats[6] = [78, 85, 80, 78, 80, 79];
+var trainer1HealthStats[6] = [76, 84, 95, 110, 95, 75];
+
+rotate() = 
+        [trainer[0] == active && trainer[1] == inactive]switchTrainer{trainer[0] = inactive; trainer[1] = active} -> move(1)
+        []
+        [trainer[1] == active && trainer[0] == inactive]switchTrainer{trainer[1] = inactive; trainer[0] = active} -> move(0);
+
+move(i) = 
+        [i == 0 && currentPokemon[1] == 0]attackFoe.i -> attack(i, 0)
+        []
+        [i == 0 && currentPokemon[1] == 1]attackFoe.i -> attack(i, 1)
+        []
+        [i == 0 && currentPokemon[1] == 2]attackFoe.i -> attack(i, 2)
+        []
+        [i == 0 && currentPokemon[1] == 3]attackFoe.i -> attack(i, 3)
+        []
+        [i == 0 && currentPokemon[1] == 4]attackFoe.i -> attack(i, 4)
+        []
+        [i == 0 && currentPokemon[1] == 5]attackFoe.i -> attack(i, 5)
+        []
+        [i == 1 && currentPokemon[0] == 0]attackFoe.i -> attack(i, 0)
+        []
+        [i == 1 && currentPokemon[0] == 1]attackFoe.i -> attack(i, 1)
+        []
+        [i == 1 && currentPokemon[0] == 2]attackFoe.i -> attack(i, 2)
+        []
+        [i == 1 && currentPokemon[0] == 3]attackFoe.i -> attack(i, 3)
+        []
+        [i == 1 && currentPokemon[0] == 4]attackFoe.i -> attack(i, 4)
+        []
+        [i == 1 && currentPokemon[0] == 5]attackFoe.i -> attack(i, 5);
+
+attack(i, m) = [i == 0 && currentPokemon[i] == 0 && m == 0]pokemon0attack -> pcase {
+    [0.9]: damage(0, 0, 0, 35, m)
+    [0.01]: damage(0, 0, 1, 20, m)
+    [0.03]: damage(0, 0, 2, 28, m)
+    [0.06]: damage(0, 0, 3, 32, m)
+} [] [i == 0 && currentPokemon[i] == 0 && m == 1]pokemon0attack -> pcase {
+    [0.06]: damage(0, 0, 0, 50, m)
+    [0.01]: damage(0, 0, 1, 8, m)
+    [0.03]: damage(0, 0, 2, 21, m)
+    [0.9]: damage(0, 0, 3, 51, m)
+} [] [i == 0 && currentPokemon[i] == 0 && m == 2]pokemon0attack -> pcase {
+    [0.9]: damage(0, 0, 0, 116, m)
+    [0.06]: damage(0, 0, 1, 29, m)
+    [0.03]: damage(0, 0, 2, 19, m)
+    [0.01]: damage(0, 0, 3, 0, m)
+} [] [i == 0 && currentPokemon[i] == 0 && m == 3]pokemon0attack -> pcase {
+    [0.9]: damage(0, 0, 0, 38, m)
+    [0.01]: damage(0, 0, 1, 22, m)
+    [0.06]: damage(0, 0, 2, 30, m)
+    [0.03]: damage(0, 0, 3, 30, m)
+} [] [i == 0 && currentPokemon[i] == 0 && m == 4]pokemon0attack -> pcase {
+    [0.06]: damage(0, 0, 0, 34, m)
+    [0.01]: damage(0, 0, 1, 17, m)
+    [0.03]: damage(0, 0, 2, 24, m)
+    [0.9]: damage(0, 0, 3, 50, m)
+} [] [i == 0 && currentPokemon[i] == 0 && m == 5]pokemon0attack -> pcase {
+    [0.9]: damage(0, 0, 0, 106, m)
+    [0.06]: damage(0, 0, 1, 31, m)
+    [0.03]: damage(0, 0, 2, 19, m)
+    [0.01]: damage(0, 0, 3, 10, m)
+} [] [i == 0 && currentPokemon[i] == 1 && m == 0]pokemon1attack -> pcase {
+    [0.9]: damage(0, 1, 0, 108, m)
+    [0.06]: damage(0, 1, 1, 61, m)
+    [0.03]: damage(0, 1, 2, 40, m)
+    [0.01]: damage(0, 1, 3, 16, m)
+} [] [i == 0 && currentPokemon[i] == 1 && m == 1]pokemon1attack -> pcase {
+    [0.9]: damage(0, 1, 0, 19, m)
+    [0.03]: damage(0, 1, 1, 12, m)
+    [0.06]: damage(0, 1, 2, 16, m)
+    [0.01]: damage(0, 1, 3, 6, m)
+} [] [i == 0 && currentPokemon[i] == 1 && m == 2]pokemon1attack -> pcase {
+    [0.06]: damage(0, 1, 0, 41, m)
+    [0.03]: damage(0, 1, 1, 41, m)
+    [0.01]: damage(0, 1, 2, 27, m)
+    [0.9]: damage(0, 1, 3, 79, m)
+} [] [i == 0 && currentPokemon[i] == 1 && m == 3]pokemon1attack -> pcase {
+    [0.9]: damage(0, 1, 0, 102, m)
+    [0.06]: damage(0, 1, 1, 68, m)
+    [0.03]: damage(0, 1, 2, 42, m)
+    [0.01]: damage(0, 1, 3, 17, m)
+} [] [i == 0 && currentPokemon[i] == 1 && m == 4]pokemon1attack -> pcase {
+    [0.06]: damage(0, 1, 0, 27, m)
+    [0.03]: damage(0, 1, 1, 26, m)
+    [0.9]: damage(0, 1, 2, 36, m)
+    [0.01]: damage(0, 1, 3, 11, m)
+} [] [i == 0 && currentPokemon[i] == 1 && m == 5]pokemon1attack -> pcase {
+    [0.01]: damage(0, 1, 0, 18, m)
+    [0.9]: damage(0, 1, 1, 45, m)
+    [0.03]: damage(0, 1, 2, 32, m)
+    [0.06]: damage(0, 1, 3, 45, m)
+} [] [i == 0 && currentPokemon[i] == 2 && m == 0]pokemon2attack -> pcase {
+    [0.01]: damage(0, 2, 0, 18, m)
+    [0.06]: damage(0, 2, 1, 31, m)
+    [0.03]: damage(0, 2, 2, 28, m)
+    [0.9]: damage(0, 2, 3, 36, m)
+} [] [i == 0 && currentPokemon[i] == 2 && m == 1]pokemon2attack -> pcase {
+    [0.06]: damage(0, 2, 0, 24, m)
+    [0.03]: damage(0, 2, 1, 13, m)
+    [0.01]: damage(0, 2, 2, 10, m)
+    [0.9]: damage(0, 2, 3, 53, m)
+} [] [i == 0 && currentPokemon[i] == 2 && m == 2]pokemon2attack -> pcase {
+    [0.06]: damage(0, 2, 0, 29, m)
+    [0.03]: damage(0, 2, 1, 20, m)
+    [0.01]: damage(0, 2, 2, 18, m)
+    [0.9]: damage(0, 2, 3, 62, m)
+} [] [i == 0 && currentPokemon[i] == 2 && m == 3]pokemon2attack -> pcase {
+    [0.01]: damage(0, 2, 0, 19, m)
+    [0.06]: damage(0, 2, 1, 33, m)
+    [0.03]: damage(0, 2, 2, 31, m)
+    [0.9]: damage(0, 2, 3, 39, m)
+} [] [i == 0 && currentPokemon[i] == 2 && m == 4]pokemon2attack -> pcase {
+    [0.06]: damage(0, 2, 0, 75, m)
+    [0.03]: damage(0, 2, 1, 28, m)
+    [0.01]: damage(0, 2, 2, 24, m)
+    [0.9]: damage(0, 2, 3, 131, m)
+} [] [i == 0 && currentPokemon[i] == 2 && m == 5]pokemon2attack -> pcase {
+    [0.01]: damage(0, 2, 0, 14, m)
+    [0.06]: damage(0, 2, 1, 24, m)
+    [0.03]: damage(0, 2, 2, 19, m)
+    [0.9]: damage(0, 2, 3, 25, m)
+} [] [i == 0 && currentPokemon[i] == 3 && m == 0]pokemon3attack -> pcase {
+    [0.06]: damage(0, 3, 0, 37, m)
+    [0.03]: damage(0, 3, 1, 31, m)
+    [0.9]: damage(0, 3, 2, 57, m)
+    [0.01]: damage(0, 3, 3, 24, m)
+} [] [i == 0 && currentPokemon[i] == 3 && m == 1]pokemon3attack -> pcase {
+    [0.9]: damage(0, 3, 0, 49, m)
+    [0.01]: damage(0, 3, 1, 12, m)
+    [0.03]: damage(0, 3, 2, 23, m)
+    [0.06]: damage(0, 3, 3, 33, m)
+} [] [i == 0 && currentPokemon[i] == 3 && m == 2]pokemon3attack -> pcase {
+    [0.9]: damage(0, 3, 0, 116, m)
+    [0.01]: damage(0, 3, 1, 20, m)
+    [0.03]: damage(0, 3, 2, 38, m)
+    [0.06]: damage(0, 3, 3, 72, m)
+} [] [i == 0 && currentPokemon[i] == 3 && m == 3]pokemon3attack -> pcase {
+    [0.06]: damage(0, 3, 0, 38, m)
+    [0.03]: damage(0, 3, 1, 33, m)
+    [0.9]: damage(0, 3, 2, 61, m)
+    [0.01]: damage(0, 3, 3, 24, m)
+} [] [i == 0 && currentPokemon[i] == 3 && m == 4]pokemon3attack -> pcase {
+    [0.06]: damage(0, 3, 0, 34, m)
+    [0.03]: damage(0, 3, 1, 27, m)
+    [0.9]: damage(0, 3, 2, 49, m)
+    [0.01]: damage(0, 3, 3, 22, m)
+} [] [i == 0 && currentPokemon[i] == 3 && m == 5]pokemon3attack -> pcase {
+    [0.9]: damage(0, 3, 0, 109, m)
+    [0.01]: damage(0, 3, 1, 25, m)
+    [0.03]: damage(0, 3, 2, 46, m)
+    [0.06]: damage(0, 3, 3, 64, m)
+} [] [i == 0 && currentPokemon[i] == 4 && m == 0]pokemon4attack -> pcase {
+    [0.01]: damage(0, 4, 0, 22, m)
+    [0.06]: damage(0, 4, 1, 62, m)
+    [0.03]: damage(0, 4, 2, 33, m)
+    [0.9]: damage(0, 4, 3, 71, m)
+} [] [i == 0 && currentPokemon[i] == 4 && m == 1]pokemon4attack -> pcase {
+    [0.06]: damage(0, 4, 0, 30, m)
+    [0.01]: damage(0, 4, 1, 0, m)
+    [0.9]: damage(0, 4, 2, 57, m)
+    [0.03]: damage(0, 4, 3, 24, m)
+} [] [i == 0 && currentPokemon[i] == 4 && m == 2]pokemon4attack -> pcase {
+    [0.01]: damage(0, 4, 0, 37, m)
+    [0.06]: damage(0, 4, 1, 57, m)
+    [0.03]: damage(0, 4, 2, 48, m)
+    [0.9]: damage(0, 4, 3, 61, m)
+} [] [i == 0 && currentPokemon[i] == 4 && m == 3]pokemon4attack -> pcase {
+    [0.01]: damage(0, 4, 0, 24, m)
+    [0.06]: damage(0, 4, 1, 74, m)
+    [0.03]: damage(0, 4, 2, 35, m)
+    [0.9]: damage(0, 4, 3, 81, m)
+} [] [i == 0 && currentPokemon[i] == 4 && m == 4]pokemon4attack -> pcase {
+    [0.06]: damage(0, 4, 0, 90, m)
+    [0.01]: damage(0, 4, 1, 67, m)
+    [0.9]: damage(0, 4, 2, 115, m)
+    [0.03]: damage(0, 4, 3, 75, m)
+} [] [i == 0 && currentPokemon[i] == 4 && m == 5]pokemon4attack -> pcase {
+    [0.01]: damage(0, 4, 0, 15, m)
+    [0.9]: damage(0, 4, 1, 94, m)
+    [0.03]: damage(0, 4, 2, 26, m)
+    [0.06]: damage(0, 4, 3, 54, m)
+} [] [i == 0 && currentPokemon[i] == 5 && m == 0]pokemon5attack -> pcase {
+    [0.9]: damage(0, 5, 0, 108, m)
+    [0.03]: damage(0, 5, 1, 17, m)
+    [0.06]: damage(0, 5, 2, 72, m)
+    [0.01]: damage(0, 5, 3, 15, m)
+} [] [i == 0 && currentPokemon[i] == 5 && m == 1]pokemon5attack -> pcase {
+    [0.03]: damage(0, 5, 0, 20, m)
+    [0.01]: damage(0, 5, 1, 6, m)
+    [0.9]: damage(0, 5, 2, 58, m)
+    [0.06]: damage(0, 5, 3, 23, m)
+} [] [i == 0 && currentPokemon[i] == 5 && m == 2]pokemon5attack -> pcase {
+    [0.06]: damage(0, 5, 0, 48, m)
+    [0.9]: damage(0, 5, 1, 126, m)
+    [0.01]: damage(0, 5, 2, 12, m)
+    [0.03]: damage(0, 5, 3, 25, m)
+} [] [i == 0 && currentPokemon[i] == 5 && m == 3]pokemon5attack -> pcase {
+    [0.9]: damage(0, 5, 0, 126, m)
+    [0.03]: damage(0, 5, 1, 21, m)
+    [0.06]: damage(0, 5, 2, 87, m)
+    [0.01]: damage(0, 5, 3, 18, m)
+} [] [i == 0 && currentPokemon[i] == 5 && m == 4]pokemon5attack -> pcase {
+    [0.03]: damage(0, 5, 0, 28, m)
+    [0.01]: damage(0, 5, 1, 18, m)
+    [0.9]: damage(0, 5, 2, 33, m)
+    [0.06]: damage(0, 5, 3, 30, m)
+} [] [i == 0 && currentPokemon[i] == 5 && m == 5]pokemon5attack -> pcase {
+    [0.03]: damage(0, 5, 0, 22, m)
+    [0.9]: damage(0, 5, 1, 57, m)
+    [0.01]: damage(0, 5, 2, 14, m)
+    [0.06]: damage(0, 5, 3, 25, m)
+} [] [i == 1 && currentPokemon[i] == 0 && m == 0]pokemon0attack -> pcase {
+    [0.03]: damage(1, 0, 0, 28, m)
+    [0.01]: damage(1, 0, 1, 27, m)
+    [0.9]: damage(1, 0, 2, 88, m)
+    [0.06]: damage(1, 0, 3, 37, m)
+} [] [i == 1 && currentPokemon[i] == 0 && m == 1]pokemon0attack -> pcase {
+    [0.03]: damage(1, 0, 0, 27, m)
+    [0.01]: damage(1, 0, 1, 22, m)
+    [0.9]: damage(1, 0, 2, 73, m)
+    [0.06]: damage(1, 0, 3, 29, m)
+} [] [i == 1 && currentPokemon[i] == 0 && m == 2]pokemon0attack -> pcase {
+    [0.9]: damage(1, 0, 0, 101, m)
+    [0.01]: damage(1, 0, 1, 21, m)
+    [0.06]: damage(1, 0, 2, 72, m)
+    [0.03]: damage(1, 0, 3, 32, m)
+} [] [i == 1 && currentPokemon[i] == 0 && m == 3]pokemon0attack -> pcase {
+    [0.03]: damage(1, 0, 0, 26, m)
+    [0.01]: damage(1, 0, 1, 14, m)
+    [0.06]: damage(1, 0, 2, 41, m)
+    [0.9]: damage(1, 0, 3, 43, m)
+} [] [i == 1 && currentPokemon[i] == 0 && m == 4]pokemon0attack -> pcase {
+    [0.9]: damage(1, 0, 0, 99, m)
+    [0.01]: damage(1, 0, 1, 12, m)
+    [0.06]: damage(1, 0, 2, 37, m)
+    [0.03]: damage(1, 0, 3, 36, m)
+} [] [i == 1 && currentPokemon[i] == 0 && m == 5]pokemon0attack -> pcase {
+    [0.03]: damage(1, 0, 0, 21, m)
+    [0.01]: damage(1, 0, 1, 20, m)
+    [0.9]: damage(1, 0, 2, 71, m)
+    [0.06]: damage(1, 0, 3, 32, m)
+} [] [i == 1 && currentPokemon[i] == 1 && m == 0]pokemon1attack -> pcase {
+    [0.9]: damage(1, 1, 0, 113, m)
+    [0.03]: damage(1, 1, 1, 24, m)
+    [0.06]: damage(1, 1, 2, 105, m)
+    [0.01]: damage(1, 1, 3, 24, m)
+} [] [i == 1 && currentPokemon[i] == 1 && m == 1]pokemon1attack -> pcase {
+    [0.9]: damage(1, 1, 0, 32, m)
+    [0.03]: damage(1, 1, 1, 26, m)
+    [0.06]: damage(1, 1, 2, 27, m)
+    [0.01]: damage(1, 1, 3, 21, m)
+} [] [i == 1 && currentPokemon[i] == 1 && m == 2]pokemon1attack -> pcase {
+    [0.06]: damage(1, 1, 0, 26, m)
+    [0.9]: damage(1, 1, 1, 76, m)
+    [0.03]: damage(1, 1, 2, 23, m)
+    [0.01]: damage(1, 1, 3, 21, m)
+} [] [i == 1 && currentPokemon[i] == 1 && m == 3]pokemon1attack -> pcase {
+    [0.9]: damage(1, 1, 0, 113, m)
+    [0.03]: damage(1, 1, 1, 50, m)
+    [0.06]: damage(1, 1, 2, 112, m)
+    [0.01]: damage(1, 1, 3, 26, m)
+} [] [i == 1 && currentPokemon[i] == 1 && m == 4]pokemon1attack -> pcase {
+    [0.06]: damage(1, 1, 0, 27, m)
+    [0.9]: damage(1, 1, 1, 88, m)
+    [0.01]: damage(1, 1, 2, 24, m)
+    [0.03]: damage(1, 1, 3, 26, m)
+} [] [i == 1 && currentPokemon[i] == 1 && m == 5]pokemon1attack -> pcase {
+    [0.9]: damage(1, 1, 0, 26, m)
+    [0.03]: damage(1, 1, 1, 21, m)
+    [0.06]: damage(1, 1, 2, 22, m)
+    [0.01]: damage(1, 1, 3, 21, m)
+} [] [i == 1 && currentPokemon[i] == 2 && m == 0]pokemon2attack -> pcase {
+    [0.01]: damage(1, 2, 0, 13, m)
+    [0.06]: damage(1, 2, 1, 20, m)
+    [0.03]: damage(1, 2, 2, 17, m)
+    [0.9]: damage(1, 2, 3, 24, m)
+} [] [i == 1 && currentPokemon[i] == 2 && m == 1]pokemon2attack -> pcase {
+    [0.03]: damage(1, 2, 0, 53, m)
+    [0.9]: damage(1, 2, 1, 83, m)
+    [0.06]: damage(1, 2, 2, 64, m)
+    [0.01]: damage(1, 2, 3, 20, m)
+} [] [i == 1 && currentPokemon[i] == 2 && m == 2]pokemon2attack -> pcase {
+    [0.01]: damage(1, 2, 0, 11, m)
+    [0.06]: damage(1, 2, 1, 16, m)
+    [0.03]: damage(1, 2, 2, 15, m)
+    [0.9]: damage(1, 2, 3, 35, m)
+} [] [i == 1 && currentPokemon[i] == 2 && m == 3]pokemon2attack -> pcase {
+    [0.01]: damage(1, 2, 0, 7, m)
+    [0.06]: damage(1, 2, 1, 10, m)
+    [0.03]: damage(1, 2, 2, 8, m)
+    [0.9]: damage(1, 2, 3, 22, m)
+} [] [i == 1 && currentPokemon[i] == 2 && m == 4]pokemon2attack -> pcase {
+    [0.01]: damage(1, 2, 0, 6, m)
+    [0.06]: damage(1, 2, 1, 8, m)
+    [0.03]: damage(1, 2, 2, 7, m)
+    [0.9]: damage(1, 2, 3, 40, m)
+} [] [i == 1 && currentPokemon[i] == 2 && m == 5]pokemon2attack -> pcase {
+    [0.03]: damage(1, 2, 0, 39, m)
+    [0.9]: damage(1, 2, 1, 68, m)
+    [0.06]: damage(1, 2, 2, 57, m)
+    [0.01]: damage(1, 2, 3, 18, m)
+} [] [i == 1 && currentPokemon[i] == 3 && m == 0]pokemon3attack -> pcase {
+    [0.06]: damage(1, 3, 0, 28, m)
+    [0.01]: damage(1, 3, 1, 12, m)
+    [0.03]: damage(1, 3, 2, 17, m)
+    [0.9]: damage(1, 3, 3, 51, m)
+} [] [i == 1 && currentPokemon[i] == 3 && m == 1]pokemon3attack -> pcase {
+    [0.06]: damage(1, 3, 0, 28, m)
+    [0.01]: damage(1, 3, 1, 9, m)
+    [0.03]: damage(1, 3, 2, 17, m)
+    [0.9]: damage(1, 3, 3, 37, m)
+} [] [i == 1 && currentPokemon[i] == 3 && m == 2]pokemon3attack -> pcase {
+    [0.06]: damage(1, 3, 0, 84, m)
+    [0.01]: damage(1, 3, 1, 10, m)
+    [0.03]: damage(1, 3, 2, 14, m)
+    [0.9]: damage(1, 3, 3, 155, m)
+} [] [i == 1 && currentPokemon[i] == 3 && m == 3]pokemon3attack -> pcase {
+    [0.06]: damage(1, 3, 0, 28, m)
+    [0.01]: damage(1, 3, 1, 6, m)
+    [0.03]: damage(1, 3, 2, 15, m)
+    [0.9]: damage(1, 3, 3, 45, m)
+} [] [i == 1 && currentPokemon[i] == 3 && m == 4]pokemon3attack -> pcase {
+    [0.06]: damage(1, 3, 0, 94, m)
+    [0.01]: damage(1, 3, 1, 6, m)
+    [0.03]: damage(1, 3, 2, 13, m)
+    [0.9]: damage(1, 3, 3, 173, m)
+} [] [i == 1 && currentPokemon[i] == 3 && m == 5]pokemon3attack -> pcase {
+    [0.06]: damage(1, 3, 0, 20, m)
+    [0.01]: damage(1, 3, 1, 10, m)
+    [0.03]: damage(1, 3, 2, 12, m)
+    [0.9]: damage(1, 3, 3, 36, m)
+} [] [i == 1 && currentPokemon[i] == 4 && m == 0]pokemon4attack -> pcase {
+    [0.03]: damage(1, 4, 0, 105, m)
+    [0.06]: damage(1, 4, 1, 111, m)
+    [0.9]: damage(1, 4, 2, 200, m)
+    [0.01]: damage(1, 4, 3, 31, m)
+} [] [i == 1 && currentPokemon[i] == 4 && m == 1]pokemon4attack -> pcase {
+    [0.06]: damage(1, 4, 0, 31, m)
+    [0.01]: damage(1, 4, 1, 23, m)
+    [0.9]: damage(1, 4, 2, 46, m)
+    [0.03]: damage(1, 4, 3, 24, m)
+} [] [i == 1 && currentPokemon[i] == 4 && m == 2]pokemon4attack -> pcase {
+    [0.06]: damage(1, 4, 0, 25, m)
+    [0.01]: damage(1, 4, 1, 21, m)
+    [0.9]: damage(1, 4, 2, 42, m)
+    [0.03]: damage(1, 4, 3, 23, m)
+} [] [i == 1 && currentPokemon[i] == 4 && m == 3]pokemon4attack -> pcase {
+    [0.06]: damage(1, 4, 0, 117, m)
+    [0.03]: damage(1, 4, 1, 115, m)
+    [0.9]: damage(1, 4, 2, 196, m)
+    [0.01]: damage(1, 4, 3, 29, m)
+} [] [i == 1 && currentPokemon[i] == 4 && m == 4]pokemon4attack -> pcase {
+    [0.01]: damage(1, 4, 0, 23, m)
+    [0.03]: damage(1, 4, 1, 26, m)
+    [0.9]: damage(1, 4, 2, 42, m)
+    [0.06]: damage(1, 4, 3, 27, m)
+} [] [i == 1 && currentPokemon[i] == 4 && m == 5]pokemon4attack -> pcase {
+    [0.06]: damage(1, 4, 0, 23, m)
+    [0.01]: damage(1, 4, 1, 21, m)
+    [0.9]: damage(1, 4, 2, 39, m)
+    [0.03]: damage(1, 4, 3, 23, m)
+} [] [i == 1 && currentPokemon[i] == 5 && m == 0]pokemon5attack -> pcase {
+    [0.01]: damage(1, 5, 0, 13, m)
+    [0.03]: damage(1, 5, 1, 18, m)
+    [0.06]: damage(1, 5, 2, 31, m)
+    [0.9]: damage(1, 5, 3, 43, m)
+} [] [i == 1 && currentPokemon[i] == 5 && m == 1]pokemon5attack -> pcase {
+    [0.06]: damage(1, 5, 0, 50, m)
+    [0.01]: damage(1, 5, 1, 16, m)
+    [0.9]: damage(1, 5, 2, 138, m)
+    [0.03]: damage(1, 5, 3, 47, m)
+} [] [i == 1 && currentPokemon[i] == 5 && m == 2]pokemon5attack -> pcase {
+    [0.01]: damage(1, 5, 0, 12, m)
+    [0.03]: damage(1, 5, 1, 16, m)
+    [0.06]: damage(1, 5, 2, 27, m)
+    [0.9]: damage(1, 5, 3, 35, m)
+} [] [i == 1 && currentPokemon[i] == 5 && m == 3]pokemon5attack -> pcase {
+    [0.01]: damage(1, 5, 0, 7, m)
+    [0.06]: damage(1, 5, 1, 20, m)
+    [0.03]: damage(1, 5, 2, 16, m)
+    [0.9]: damage(1, 5, 3, 42, m)
+} [] [i == 1 && currentPokemon[i] == 5 && m == 4]pokemon5attack -> pcase {
+    [0.01]: damage(1, 5, 0, 6, m)
+    [0.06]: damage(1, 5, 1, 17, m)
+    [0.03]: damage(1, 5, 2, 13, m)
+    [0.9]: damage(1, 5, 3, 39, m)
+} [] [i == 1 && currentPokemon[i] == 5 && m == 5]pokemon5attack -> pcase {
+    [0.06]: damage(1, 5, 0, 40, m)
+    [0.01]: damage(1, 5, 1, 16, m)
+    [0.9]: damage(1, 5, 2, 101, m)
+    [0.03]: damage(1, 5, 3, 35, m)
+};
+
+//i: Trainer j: Trainer pokemon l: pokemon move m: opponent pokemon
+damage(i, j, l, d, m) = 
+    [i == 0 && j == 0 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 0 && l == 1]damageFoe.i -> pcase {
+        [0.25]: missFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - 0} -> switch(1, m)
+        [0.7]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.05]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 0 && l == 2]damageFoe.i -> pcase {
+        [0.88]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.12]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 0 && l == 3]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 1 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 1 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 1 && l == 2]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 1 && l == 3]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 2 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 2 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 2 && l == 2]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 2 && l == 3]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 3 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 3 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 3 && l == 2]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - 0} -> switch(1, m)
+        [0.84]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.06]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 3 && l == 3]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 4 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 4 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 4 && l == 2]damageFoe.i -> pcase {
+        [0.15]: missFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - 0} -> switch(1, m)
+        [0.79]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.06]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 4 && l == 3]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - 0} -> switch(1, m)
+        [0.84]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.06]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 5 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 5 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 5 && l == 2]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 0 && j == 5 && l == 3]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - d} -> switch(1, m)
+        [0.07]: criticalHitFoe.i{trainer0HealthStats[m] = trainer0HealthStats[m] - (d * 2)} -> switch(1, m)
+    }
+    []
+    [i == 1 && j == 0 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 0 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 0 && l == 2]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.84]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 0 && l == 3]damageFoe.i -> pcase {
+        [0.15]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.79]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 1 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 1 && l == 1]damageFoe.i -> pcase {
+        [0.3]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.65]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.05]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 1 && l == 2]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 1 && l == 3]damageFoe.i -> pcase {
+        [0.88]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.12]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 2 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 2 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 2 && l == 2]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 2 && l == 3]damageFoe.i -> pcase {
+        [0.25]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.7]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.05]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 3 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 3 && l == 1]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 3 && l == 2]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 3 && l == 3]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 4 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 4 && l == 1]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.84]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 4 && l == 2]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.84]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 4 && l == 3]damageFoe.i -> pcase {
+        [0.88]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.12]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 5 && l == 0]damageFoe.i -> pcase {
+        [0.93]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.07]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 5 && l == 1]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.84]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 5 && l == 2]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.84]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+    }
+    []
+    [i == 1 && j == 5 && l == 3]damageFoe.i -> pcase {
+        [0.1]: missFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - 0} -> switch(0, m)
+        [0.84]: hitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - d} -> switch(0, m)
+        [0.06]: criticalHitFoe.i{trainer1HealthStats[m] = trainer1HealthStats[m] - (d * 2)} -> switch(0, m)
+};
+
+switch(i, c) =
+	[i == 1]sendPokemon.i{if (trainer1HealthStats[c] <= 0) {currentPokemon[i] = c + 1}} -> end()
+	[]
+	[i == 0]sendPokemon.i{if (trainer0HealthStats[c] <= 0) {currentPokemon[i] = c + 1}} -> end();
+
+end() =
+	[currentPokemon[0] > 5]trainer1win{trainer[0] = lose; trainer[1] = win} -> Stop
+	[]
+	[currentPokemon[1] > 5]trainer0win{trainer[0] = win; trainer[1] = lose} -> Stop
+	[]
+	[currentPokemon[0] <= 5 && currentPokemon[1] <= 5] rotate();
+
+start() = 
+	trainer0start{trainer[0] = active; trainer[1] = inactive} -> move(0)
+	[]
+	trainer1start{trainer[1] = active; trainer[0] = inactive} -> move(1);
+
+simulate = start();
+
+#define trainer0wins (trainer[0] == win && trainer[1] == lose);
+#define trainer1wins (trainer[1] == win && trainer[0] == lose);
+#define bothtrainerswin (trainer[0] == win && trainer[1] == win);
+#define bothtrainerslose (trainer[0] == lose && trainer[1] == lose);
+
+#assert simulate reaches trainer0wins;
+#assert simulate reaches trainer1wins;
+#assert simulate reaches bothtrainerswin;
+#assert simulate reaches bothtrainerslose;
+
+#assert simulate reaches trainer1wins with prob;
+#assert simulate reaches trainer2wins with prob;
