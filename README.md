@@ -14,7 +14,7 @@ Repository for CS4211 project, modelling a simplified version of a Pokemon battl
 - Download the generated 'battle_simulator_multiple_pokemon_real_data.pcsp' file
 - Open and run it in PAT
 - NOTE:
-   - We assume that the CSV file contains the exact number of rows, as there are pokemons. The program will fail if there are empty rows i.e. rows that exist but only contain null values
+   - We assume that the CSV file contains the exact number of rows, as there are pokemons. The program will fail if there are empty rows i.e. rows that exist but only contain null values. If this happens, delete all rowsafter the last non empty row.
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
