@@ -7,6 +7,7 @@
 
 ### Steps
 - Import all the CSV files from the repository and upload them to Google Colab notebook directory
+   - Importing can be done by downloading the repository as a zip file
    - It should be the current working directory
    - There should be a sample data folder present as well (if you are in the correct directory)
    - The input CSVs should be named 'trainer1.csv' or 'trainer2.csv' explicitly
