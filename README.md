@@ -2,7 +2,7 @@
 
 ## Usage of the automated pcsp file generator
 
-- The python notebook is hosted on Google Colab [here]
+- The python notebook is hosted on Google Colab [here] (A gmail account is required to access it)
 - Proceed to the link and follow the steps below
 
 ### Steps
