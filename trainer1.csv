@@ -1,7 +1,3 @@
 pokemon,level,hp,attack,defense,sp. attack,sp. defense,move1,move2,move3,move4
 Typhlosion,40,78,84,78,109,85,Flamethrower,Iron Tail,Shadow Claw,Thunder Punch
 Feraligatr,40,85,105,100,79,83,Surf,Aerial Ace,Body Slam,Avalanche
-Meganium,40,80,82,100,83,100,Magical Leaf,Strength,Headbutt,Solar Beam
-Charizard,40,78,84,78,109,85,Flamethrower,Dragon Claw,Giga Impact,Incinerate
-Venusaur,40,80,82,83,100,100,Magical Leaf,Sludge Bomb,Power Whip,Hyper Beam
-Blastoise,40,79,83,100,85,105,Surf,Ice Beam,Earthquake,Dark Pulse
